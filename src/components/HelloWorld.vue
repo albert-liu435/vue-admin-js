@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
+//从上一个组件中获取msg信息
 defineProps({
   msg: String,
 })
