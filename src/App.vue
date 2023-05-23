@@ -111,22 +111,59 @@
       <Footer />
     </el-container>
   </el-container>
-  <el-container v-else>
-    <div>false</div>
+  <el-container v-else
+                class="container">
+    <router-view />
   </el-container>
 
 </template>
 
 <script setup>
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import { localGet, pathMap } from '@/utils'
+
+
+
+const noMenu = ['/login']
+const router = useRouter()
 // https://blog.csdn.net/weixin_44283432/article/details/111190176 https://zhuanlan.zhihu.com/p/521025881 https://blog.csdn.net/lwf3115841/article/details/128599479
 const state = reactive({
   showMenu: true,
   //表示是否展示处理
   defaultOpen: ['1', '2', '3', '4'],
   currentPath: '/',
+})
+
+//https://router.vuejs.org/zh/guide/advanced/navigation-guards.html
+//全局后置路由守卫router.afterEach（ 切换之后调用，to、from参数，没有next参数）
+//全局后置路由守卫——初始化的时候被调用、每次路由切换之后被调用
+// router.afterEach((to, from) => {
+//  //如果是登录页面，则不展示 
+//   state.showMenu = !noMenu.includes(to.path)
+// })
+
+//全局前置路由守卫——初始化的时候被调用、每次路由切换之前被调用
+router.beforeEach((to, from, next) => {
+  // if (to.path == '/login') {
+  //   // 如果路径是 /login 则正常执行
+  //   next()
+  // } else {
+  //   // 如果不是 /login，判断是否有 token
+  //   if (!localGet('token')) {
+  //     // 如果没有，则跳至登录页面
+  //     next({ path: '/login' })
+  //   } else {
+  //     // 否则继续执行
+  //     next()
+  //   }
+  // }
+  next()
+  state.currentPath = to.path
+  console.log('test:' + state.currentPath)
+  document.title = pathMap[to.name]
 })
 
 </script>

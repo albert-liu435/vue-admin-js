@@ -1,44 +1,113 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-
-import About from '../views/About.vue'
-import Home from '../views/Home.vue'
-import Introduction from '../views/router/Introduction.vue'
+import { createRouter, createWebHashHistory } from "vue-router";
 
 const router = createRouter({
   history: createWebHashHistory(), // hash模式：createWebHashHistory，history模式：createWebHistory
-  //定义一些路由数组
-  // console.log(import.meta.env);
   routes: [
-
     {
-      path: '/introduction',
-      name: 'Introduction',
-      // 每个路由都需要映射到一个组件。
-      component: Introduction
+      path: "/",
+      redirect: "/introduce",
     },
     {
-      path: '/',
-      name: 'home',
-      // 每个路由都需要映射到一个组件。
-      component: Home
+      path: "/introduce",
+      name: "introduce",
+      component: () =>
+        import(/* webpackChunkName: "introduce" */ "../views/Introduce.vue"),
     },
-    {
-        path:'/about',
-        name:'about',
-        component: About
-    }
     // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
-    // }
-  ]
-})
+    //   path: "/dashboard",
+    //   name: "dashboard",
+    //   component: () =>
+    //     import(/* webpackChunkName: "dashboard" */ "../views/Index.vue"),
+    // },
+    // {
+    //   path: "/login",
+    //   name: "login",
+    //   component: () =>
+    //     import(/* webpackChunkName: "login" */ "../views/Login.vue"),
+    // },
+    // {
+    //   path: "/add",
+    //   name: "add",
+    //   component: () =>
+    //     import(/* webpackChunkName: "add" */ "../views/AddGood.vue"),
+    // },
+    // {
+    //   path: "/swiper",
+    //   name: "swiper",
+    //   component: () =>
+    //     import(/* webpackChunkName: "swiper" */ "../views/Swiper.vue"),
+    // },
+    // {
+    //   path: "/hot",
+    //   name: "hot",
+    //   component: () =>
+    //     import(/* webpackChunkName: "hot" */ "../views/IndexConfig.vue"),
+    // },
+    // {
+    //   path: "/new",
+    //   name: "new",
+    //   component: () =>
+    //     import(/* webpackChunkName: "new" */ "../views/IndexConfig.vue"),
+    // },
+    // {
+    //   path: "/recommend",
+    //   name: "recommend",
+    //   component: () =>
+    //     import(/* webpackChunkName: "recommend" */ "../views/IndexConfig.vue"),
+    // },
+    // {
+    //   path: "/category",
+    //   name: "category",
+    //   component: () =>
+    //     import(/* webpackChunkName: "category" */ "../views/Category.vue"),
+    //   children: [
+    //     {
+    //       path: "/category/level2",
+    //       name: "level2",
+    //       component: () =>
+    //         import(/* webpackChunkName: "level2" */ "../views/Category.vue"),
+    //     },
+    //     {
+    //       path: "/category/level3",
+    //       name: "level3",
+    //       component: () =>
+    //         import(/* webpackChunkName: "level3" */ "../views/Category.vue"),
+    //     },
+    //   ],
+    // },
+    // {
+    //   path: "/good",
+    //   name: "good",
+    //   component: () =>
+    //     import(/* webpackChunkName: "new" */ "../views/Good.vue"),
+    // },
+    // {
+    //   path: "/guest",
+    //   name: "guest",
+    //   component: () =>
+    //     import(/* webpackChunkName: "guest" */ "../views/Guest.vue"),
+    // },
+    // {
+    //   path: "/order",
+    //   name: "order",
+    //   component: () =>
+    //     import(/* webpackChunkName: "order" */ "../views/Order.vue"),
+    // },
+    // {
+    //   path: "/order_detail",
+    //   name: "order_detail",
+    //   component: () =>
+    //     import(
+    //       /* webpackChunkName: "order_detail" */ "../views/OrderDetail.vue"
+    //     ),
+    // },
+    // {
+    //   path: "/account",
+    //   name: "account",
+    //   component: () =>
+    //     import(/* webpackChunkName: "account" */ "../views/Account.vue"),
+    // },
+  ],
+});
 
-// console.log('测试信息')
-//export的作用，就是用于从模块中导出函数、对象或原始值，以便其他程序可以通过 import 语句使用它们.export 导出的内容，都会添加到文件对象中，可以简单的先理解为深拷贝。
-//export default 指定模块的默认输出，一个模块只能有一个默认输出。
-export default router
+export default router;
