@@ -1,27 +1,105 @@
-import { createApp } from 'vue'
-import './style.css'
-// 从一个单文件组件中导入根组件
-import App from './App.vue'
+import { createApp } from "vue";
+import {
+  ElButton,
+  ElContainer,
+  ElAside,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItemGroup,
+  ElMenuItem,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElCheckbox,
+  ElPopover,
+  ElTag,
+  ElCard,
+  ElTable,
+  ElTableColumn,
+  ElPopconfirm,
+  ElUpload,
+  ElDialog,
+  ElPagination,
+  ElCascader,
+  ElRadioGroup,
+  ElRadio,
+  ElSelect,
+  ElOption,
+} from "element-plus";
+import App from "./App.vue";
+//引入路由
+import router from "@/router";
+import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
-//导入路由，命名为router
-import router from './router'
+const orderStatus = {
+  0: "待支付",
+  1: "已支付",
+  2: "配货完成",
+  3: "出库成功",
+  4: "交易成功",
+  "-1": "手动关闭",
+  "-2": "超时关闭",
+  "-3": "商家关闭",
+};
 
-//完整导入
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
+const app = createApp(App); // 生成 Vue 实例 app
 
+//我们可以使用app.component()方法，让组件在当前 Vue 应用中全局可用。
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  //创建全局组件
+  //app.component（'组件名',组件模块名）
+  app.component(key, component);
+}
 
-console.log(import.meta.env)
+// 全局方法,注册全局filter对象
+//参考:https://blog.csdn.net/weixin_45324044/article/details/123138169
+app.config.globalProperties.$filters = {
+  orderMap(status) {
+    return orderStatus[status] || "未知状态";
+  },
+  prefix(url) {
+    console.log("url:" + url);
+    if (url && url.startsWith("http")) {
+      return url;
+    } else {
+      url = `http://backend-api-02.newbee.ltd${url}`;
+      return url;
+    }
+  },
+};
+//回到顶部
+app.config.globalProperties.goTop = function () {
+  const main = document.querySelector(".main");
+  main.scrollTop = 0;
+};
 
-// 生成 Vue 实例 app
-const app=createApp(App);
-
-//确保 _use_ 路由实例使
-//整个应用支持路由。
-app.use(router)
-
-app.use(ElementPlus)
-
-//挂载应用
-//应用实例必须在调用了 .mount() 方法后才会渲染出来。该方法接收一个“容器”参数，可以是一个实际的 DOM 元素或是一个 CSS 选择器字符串
-app.mount('#app')
+app.use(router); // 引用路由实例
+//引用Element-plus插件
+//当app.use()在同一个插件上多次调用时，插件只会安装一次。
+app
+  .use(ElButton)
+  .use(ElContainer)
+  .use(ElAside)
+  .use(ElMenu)
+  .use(ElSubMenu)
+  .use(ElMenuItemGroup)
+  .use(ElMenuItem)
+  .use(ElForm)
+  .use(ElFormItem)
+  .use(ElCheckbox)
+  .use(ElInput)
+  .use(ElPopover)
+  .use(ElTag)
+  .use(ElCard)
+  .use(ElTable)
+  .use(ElTableColumn)
+  .use(ElPopconfirm)
+  .use(ElUpload)
+  .use(ElDialog)
+  .use(ElPagination)
+  .use(ElCascader)
+  .use(ElRadioGroup)
+  .use(ElRadio)
+  .use(ElSelect)
+  .use(ElOption);
+app.mount("#app"); // 挂载到 #app
