@@ -6,12 +6,16 @@
     </div>
     <img style="width: 70%;
       display: block;
-      margin: 0 auto;" src="https://s.yezgea02.com/1616331765416/WechatIMG40038.png" alt="">
+      margin: 0 auto;"
+         src="https://s.yezgea02.com/1616331765416/WechatIMG40038.png"
+         alt="">
     <h1>开发及部署文档</h1>
     <img style="width: 70%;
       display: block;
-      margin: 0 auto;" src="https://s.yezgea02.com/1616938239101/419241616938196_.pic.jpg" />
-    <ul class="course" @click="goJuejin">
+      margin: 0 auto;"
+         src="https://s.yezgea02.com/1616938239101/419241616938196_.pic.jpg" />
+    <ul class="course"
+        @click="goJuejin">
       <li>开篇词：通关Vue3.0 企业级项目开发，升职加薪快人一步</li>
       <li>项目须知与课程约定</li>
       <li>大势所趋：“前后端分离”开发模式</li>
@@ -33,7 +37,8 @@
       <li>Spring Boot 实践之整合 Swagger 生成接口文档</li>
       <li>后端 API 项目启动和运行注意事项</li>
     </ul>
-    <ul class="course" @click="goJuejin">
+    <ul class="course"
+        @click="goJuejin">
       <li>接口参数处理和统一响应结果处理</li>
       <li>API 接口开发实战之用户登录接口开发</li>
       <li>API 接口开发实战之用户身份认证详解</li>
@@ -80,13 +85,13 @@ const goJuejin = () => {
 }
 </script>
 <style scoped>
-  .course {
-    font-weight: bold;
-    display: inline-block;
-  }
-  .course li {
-    line-height: 36px;
-    color: #409eff;
-    cursor: pointer;
-  }
+.course {
+  font-weight: bold;
+  display: inline-block;
+}
+.course li {
+  line-height: 36px;
+  color: #409eff;
+  cursor: pointer;
+}
 </style>

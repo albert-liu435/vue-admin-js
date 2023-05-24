@@ -2,61 +2,51 @@
   <el-card class="category-container">
     <template #header>
       <div class="header">
-        <el-button type="primary" :icon="Plus" @click="handleAdd">增加</el-button>
-        <el-popconfirm
-          title="确定删除吗？"
-          confirmButtonText='确定'
-          cancelButtonText='取消'
-          @confirm="handleDelete"
-        >
+        <el-button type="primary"
+                   :icon="Plus"
+                   @click="handleAdd">增加</el-button>
+        <el-popconfirm title="确定删除吗？"
+                       confirmButtonText='确定'
+                       cancelButtonText='取消'
+                       @confirm="handleDelete">
           <template #reference>
-            <el-button type="danger" :icon="Delete">批量删除</el-button>
+            <el-button type="danger"
+                       :icon="Delete">批量删除</el-button>
           </template>
         </el-popconfirm>
       </div>
     </template>
-    <el-table
-      :load="state.loading"
-      ref="multipleTable"
-      :data="state.tableData"
-      tooltip-effect="dark"
-      style="width: 100%"
-      @selection-change="handleSelectionChange">
-      <el-table-column
-        type="selection"
-        width="55"
-      >
+    <el-table :load="state.loading"
+              ref="multipleTable"
+              :data="state.tableData"
+              tooltip-effect="dark"
+              style="width: 100%"
+              @selection-change="handleSelectionChange">
+      <el-table-column type="selection"
+                       width="55">
       </el-table-column>
-      <el-table-column
-        prop="categoryName"
-        label="分类名称"
-      >
+      <el-table-column prop="categoryName"
+                       label="分类名称">
       </el-table-column>
-      <el-table-column
-        prop="categoryRank"
-        label="排序值"
-        width="120"
-      >
+      <el-table-column prop="categoryRank"
+                       label="排序值"
+                       width="120">
       </el-table-column>
-      <el-table-column
-        prop="createTime"
-        label="添加时间"
-        width="200"
-      >
+      <el-table-column prop="createTime"
+                       label="添加时间"
+                       width="200">
       </el-table-column>
-      <el-table-column
-        label="操作"
-        width="220"
-      >
+      <el-table-column label="操作"
+                       width="220">
         <template #default="scope">
-          <a style="cursor: pointer; margin-right: 10px" @click="handleEdit(scope.row.categoryId)">修改</a>
-          <a style="cursor: pointer; margin-right: 10px" @click="handleNext(scope.row)">下级分类</a>
-          <el-popconfirm
-            title="确定删除吗？"
-            confirmButtonText='确定'
-            cancelButtonText='取消'
-            @confirm="handleDeleteOne(scope.row.categoryId)"
-          >
+          <a style="cursor: pointer; margin-right: 10px"
+             @click="handleEdit(scope.row.categoryId)">修改</a>
+          <a style="cursor: pointer; margin-right: 10px"
+             @click="handleNext(scope.row)">下级分类</a>
+          <el-popconfirm title="确定删除吗？"
+                         confirmButtonText='确定'
+                         cancelButtonText='取消'
+                         @confirm="handleDeleteOne(scope.row.categoryId)">
             <template #reference>
               <a style="cursor: pointer">删除</a>
             </template>
@@ -65,15 +55,15 @@
       </el-table-column>
     </el-table>
     <!--总数超过一页，再展示分页器-->
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="state.total"
-      :page-size="state.pageSize"
-      :current-page="state.currentPage"
-      @current-change="changePage"
-    />
-    <DialogAddCategory ref='addCate' :reload="getCategory" :type="state.type" />
+    <el-pagination background
+                   layout="prev, pager, next"
+                   :total="state.total"
+                   :page-size="state.pageSize"
+                   :current-page="state.currentPage"
+                   @current-change="changePage" />
+    <DialogAddCategory ref='addCate'
+                       :reload="getCategory"
+                       :type="state.type" />
   </el-card>
 </template>
 
@@ -195,5 +185,4 @@ const handleDeleteOne = (id) => {
 </script>
 
 <style>
-
 </style>

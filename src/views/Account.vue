@@ -1,5 +1,6 @@
 <template>
   <el-card class="account-container">
+    <!-- 给表单添加 :rules=“rules”,指出表单验证 -->
     <el-form :model="state.nameForm" :rules="state.rules" ref="nameRef" label-width="80px" label-position="right" class="demo-ruleForm">
       <el-form-item label="登录名：" prop="loginName">
         <el-input style="width: 200px" v-model="state.nameForm.loginName"></el-input>
@@ -13,6 +14,7 @@
     </el-form>
   </el-card>
   <el-card class="account-container">
+    <!-- 给表单添加 :rules=“rules”,指出表单验证 -->
     <el-form :model="state.passForm" :rules="state.rules" ref="passRef" label-width="80px" label-position="right" class="demo-ruleForm">
       <el-form-item label="原密码：" prop="oldpass">
         <el-input style="width: 200px" v-model="state.passForm.oldpass"></el-input>
@@ -33,6 +35,7 @@ import axios from '@/utils/axios'
 import { ElMessage } from 'element-plus'
 import md5 from 'js-md5'
 
+//使用ref函数，用于创建一个响应式数据
 const nameRef = ref(null)
 const passRef = ref(null)
 const state = reactive({
@@ -41,10 +44,12 @@ const state = reactive({
     loginName: '',
     nickName: ''
   },
+  //3.验证规则的设置，可以直接写在data区域中，也可以直接写在标签中
   passForm: {
     oldpass: '',
     newpass: ''
   },
+    //3.验证规则的设置，可以直接写在data区域中，也可以直接写在标签中
   rules: {
     loginName: [
       { required: 'true', message: '登录名不能为空', trigger: ['change'] }
@@ -60,16 +65,32 @@ const state = reactive({
     ]
   },
 })
+//组件挂载时调用
 onMounted(() => {
+  //http://backend-api-02.newbee.ltd/manage-api/v1/adminUser/profile
+  //调用返回的信息为
+//   {
+// 	"resultCode": 200,
+// 	"message": "SUCCESS",
+// 	"data": {
+// 		"adminUserId": 1,
+// 		"loginUserName": "admin",
+// 		"loginPassword": "******",
+// 		"nickName": "十三",
+// 		"locked": 0
+// 	}
+// }
+
   axios.get('/adminUser/profile').then(res => {
     state.user = res
     state.nameForm.loginName = res.loginUserName
     state.nameForm.nickName = res.nickName
-    console.log('res:'+res)
+    // console.log('res:'+res)
   })
 })
 //提交修改用户名按钮
 const submitName = () => {
+  //校验输入的数据不能为空
   nameRef.value.validate((vaild) => {
     if (vaild) {
       axios.put('/adminUser/name', {

@@ -2,72 +2,59 @@
   <el-card class="index-container">
     <template #header>
       <div class="header">
-        <el-button type="primary" :icon="Plus" @click="handleAdd">增加</el-button>
-        <el-popconfirm
-          title="确定删除吗？"
-          confirmButtonText='确定'
-          cancelButtonText='取消'
-          @confirm="handleDelete"
-        >
+        <el-button type="primary"
+                   :icon="Plus"
+                   @click="handleAdd">增加</el-button>
+        <el-popconfirm title="确定删除吗？"
+                       confirmButtonText='确定'
+                       cancelButtonText='取消'
+                       @confirm="handleDelete">
           <template #reference>
-            <el-button type="danger" :icon="Delete">批量删除</el-button>
+            <el-button type="danger"
+                       :icon="Delete">批量删除</el-button>
           </template>
         </el-popconfirm>
       </div>
     </template>
-    <el-table
-      :load="state.loading"
-      ref="multipleTable"
-      :data="state.tableData"
-      tooltip-effect="dark"
-      style="width: 100%"
-      @selection-change="handleSelectionChange">
-      <el-table-column
-        type="selection"
-        width="55">
+    <el-table :load="state.loading"
+              ref="multipleTable"
+              :data="state.tableData"
+              tooltip-effect="dark"
+              style="width: 100%"
+              @selection-change="handleSelectionChange">
+      <el-table-column type="selection"
+                       width="55">
       </el-table-column>
-      <el-table-column
-        prop="configName"
-        label="商品名称"
-      >
+      <el-table-column prop="configName"
+                       label="商品名称">
       </el-table-column>
-      <el-table-column
-        label="跳转链接"
-        >
+      <el-table-column label="跳转链接">
         <template #default="scope">
-          <a target="_blank" :href="scope.row.redirectUrl">{{ scope.row.redirectUrl }}</a>
+          <a target="_blank"
+             :href="scope.row.redirectUrl">{{ scope.row.redirectUrl }}</a>
         </template>
       </el-table-column>
-      <el-table-column
-        prop="configRank"
-        label="排序值"
-        width="120"
-      >
+      <el-table-column prop="configRank"
+                       label="排序值"
+                       width="120">
       </el-table-column>
-      <el-table-column
-        prop="goodsId"
-        label="商品编号"
-        width="200"
-      >
+      <el-table-column prop="goodsId"
+                       label="商品编号"
+                       width="200">
       </el-table-column>
-      <el-table-column
-        prop="createTime"
-        label="添加时间"
-        width="200"
-      >
+      <el-table-column prop="createTime"
+                       label="添加时间"
+                       width="200">
       </el-table-column>
-      <el-table-column
-        label="操作"
-        width="100"
-      >
+      <el-table-column label="操作"
+                       width="100">
         <template #default="scope">
-          <a style="cursor: pointer; margin-right: 10px" @click="handleEdit(scope.row.configId)">修改</a>
-          <el-popconfirm
-            title="确定删除吗？"
-            confirmButtonText='确定'
-            cancelButtonText='取消'
-            @confirm="handleDeleteOne(scope.row.configId)"
-          >
+          <a style="cursor: pointer; margin-right: 10px"
+             @click="handleEdit(scope.row.configId)">修改</a>
+          <el-popconfirm title="确定删除吗？"
+                         confirmButtonText='确定'
+                         cancelButtonText='取消'
+                         @confirm="handleDeleteOne(scope.row.configId)">
             <template #reference>
               <a style="cursor: pointer">删除</a>
             </template>
@@ -76,16 +63,17 @@
       </el-table-column>
     </el-table>
     <!--总数超过一页，再展示分页器-->
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="state.total"
-      :page-size="state.pageSize"
-      :current-page="state.currentPage"
-      @current-change="changePage"
-    />
+    <el-pagination background
+                   layout="prev, pager, next"
+                   :total="state.total"
+                   :page-size="state.pageSize"
+                   :current-page="state.currentPage"
+                   @current-change="changePage" />
   </el-card>
-  <DialogAddGood ref='addGood' :reload="getIndexConfig" :type="state.type" :configType="state.configType" />
+  <DialogAddGood ref='addGood'
+                 :reload="getIndexConfig"
+                 :type="state.type"
+                 :configType="state.configType" />
 </template>
 
 <script setup>
@@ -188,10 +176,10 @@ const changePage = (val) => {
 </script>
 
 <style scoped>
-  .index-container {
-    min-height: 100%;
-  }
-  .el-card.is-always-shadow {
-    min-height: 100%!important;
-  }
+.index-container {
+  min-height: 100%;
+}
+.el-card.is-always-shadow {
+  min-height: 100% !important;
+}
 </style>

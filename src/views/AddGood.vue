@@ -130,6 +130,7 @@ const state = reactive({
     goodsCoverImg: '',
     tag: ''
   },
+  //规则校验
   rules: {
     goodsName: [
       { required: 'true', message: '请填写商品名称', trigger: ['change'] }

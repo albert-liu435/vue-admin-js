@@ -140,7 +140,7 @@ onMounted(() => {
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option)
-  } 
+  }
 })
 onUnmounted(() => {
   myChart.dispose()
@@ -148,18 +148,18 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-  .introduce .order {
-    display: flex;
-    margin-bottom: 50px;
-  }
-  .introduce .order .order-item {
-    flex: 1;
-    margin-right: 20px;
-  }
-  .introduce .order .order-item:last-child{
-    margin-right: 0;
-  }
-  #zoom {
-    min-height: 300px;
-  }
+.introduce .order {
+  display: flex;
+  margin-bottom: 50px;
+}
+.introduce .order .order-item {
+  flex: 1;
+  margin-right: 20px;
+}
+.introduce .order .order-item:last-child {
+  margin-right: 0;
+}
+#zoom {
+  min-height: 300px;
+}
 </style>
